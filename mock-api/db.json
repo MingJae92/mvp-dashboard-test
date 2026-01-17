@@ -1,0 +1,262 @@
+{
+  "employees": [
+    {
+      "id": 1,
+      "name": "Sarah Chen",
+      "role": "Frontend Developer",
+      "skills": ["JavaScript", "React", "CSS", "HTML", "Git"]
+    },
+    {
+      "id": 2,
+      "name": "Marcus Johnson",
+      "role": "Backend Developer",
+      "skills": ["Python", "Django", "PostgreSQL", "REST APIs", "Docker"]
+    },
+    {
+      "id": 3,
+      "name": "Emma Williams",
+      "role": "Full Stack Developer",
+      "skills": ["JavaScript", "Node.js", "React", "MongoDB", "AWS"]
+    },
+    {
+      "id": 4,
+      "name": "Alex Kumar",
+      "role": "DevOps Engineer",
+      "skills": ["Docker", "Kubernetes", "CI/CD", "Linux", "Terraform"]
+    },
+    {
+      "id": 5,
+      "name": "Lisa Martinez",
+      "role": "Product Manager",
+      "skills": ["Agile", "User Stories", "Product Strategy", "Jira", "Stakeholder Management"]
+    },
+    {
+      "id": 6,
+      "name": "Tom Anderson",
+      "role": "Junior Developer",
+      "skills": ["JavaScript", "HTML", "CSS", "Git"]
+    }
+  ],
+  "skills": [
+    {
+      "id": 1,
+      "name": "JavaScript",
+      "category": "Programming Language",
+      "description": "Core programming language for web development"
+    },
+    {
+      "id": 2,
+      "name": "React",
+      "category": "Framework",
+      "description": "Popular JavaScript library for building user interfaces"
+    },
+    {
+      "id": 3,
+      "name": "Python",
+      "category": "Programming Language",
+      "description": "Versatile programming language for backend and data science"
+    },
+    {
+      "id": 4,
+      "name": "Docker",
+      "category": "DevOps",
+      "description": "Container platform for application deployment"
+    },
+    {
+      "id": 5,
+      "name": "Kubernetes",
+      "category": "DevOps",
+      "description": "Container orchestration platform"
+    },
+    {
+      "id": 6,
+      "name": "PostgreSQL",
+      "category": "Database",
+      "description": "Advanced open-source relational database"
+    },
+    {
+      "id": 7,
+      "name": "MongoDB",
+      "category": "Database",
+      "description": "Popular NoSQL document database"
+    },
+    {
+      "id": 8,
+      "name": "AWS",
+      "category": "Cloud Platform",
+      "description": "Amazon Web Services cloud computing platform"
+    },
+    {
+      "id": 9,
+      "name": "Node.js",
+      "category": "Runtime",
+      "description": "JavaScript runtime for server-side development"
+    },
+    {
+      "id": 10,
+      "name": "TypeScript",
+      "category": "Programming Language",
+      "description": "Typed superset of JavaScript"
+    },
+    {
+      "id": 11,
+      "name": "REST APIs",
+      "category": "Architecture",
+      "description": "Representational State Transfer API design"
+    },
+    {
+      "id": 12,
+      "name": "GraphQL",
+      "category": "Query Language",
+      "description": "Query language for APIs"
+    },
+    {
+      "id": 13,
+      "name": "CI/CD",
+      "category": "DevOps",
+      "description": "Continuous Integration and Continuous Deployment"
+    },
+    {
+      "id": 14,
+      "name": "Agile",
+      "category": "Methodology",
+      "description": "Iterative project management and product development methodology"
+    },
+    {
+      "id": 15,
+      "name": "Git",
+      "category": "Version Control",
+      "description": "Distributed version control system"
+    },
+    {
+      "id": 16,
+      "name": "CSS",
+      "category": "Styling",
+      "description": "Cascading Style Sheets for web design"
+    },
+    {
+      "id": 17,
+      "name": "HTML",
+      "category": "Markup",
+      "description": "HyperText Markup Language for web structure"
+    },
+    {
+      "id": 18,
+      "name": "Vue.js",
+      "category": "Framework",
+      "description": "Progressive JavaScript framework"
+    },
+    {
+      "id": 19,
+      "name": "Django",
+      "category": "Framework",
+      "description": "High-level Python web framework"
+    },
+    {
+      "id": 20,
+      "name": "Terraform",
+      "category": "DevOps",
+      "description": "Infrastructure as Code tool"
+    }
+  ],
+  "readiness": [
+    {
+      "id": 1,
+      "employeeId": 1,
+      "employeeName": "Sarah Chen",
+      "currentRole": "Frontend Developer",
+      "targetRole": "Senior Frontend Developer",
+      "matchPercentage": 75,
+      "currentSkills": [
+        { "name": "JavaScript", "level": 4 },
+        { "name": "React", "level": 4 },
+        { "name": "CSS", "level": 3 },
+        { "name": "HTML", "level": 4 },
+        { "name": "Git", "level": 3 }
+      ],
+      "requiredSkills": [
+        { "name": "JavaScript", "level": 5, "importance": "critical" },
+        { "name": "React", "level": 5, "importance": "critical" },
+        { "name": "TypeScript", "level": 4, "importance": "critical" },
+        { "name": "CSS", "level": 4, "importance": "important" },
+        { "name": "HTML", "level": 5, "importance": "important" },
+        { "name": "Git", "level": 4, "importance": "important" },
+        { "name": "GraphQL", "level": 3, "importance": "nice-to-have" },
+        { "name": "CI/CD", "level": 3, "importance": "nice-to-have" }
+      ],
+      "skillGaps": [
+        { "name": "TypeScript", "currentLevel": 0, "requiredLevel": 4, "importance": "critical" },
+        { "name": "JavaScript", "currentLevel": 4, "requiredLevel": 5, "importance": "critical" },
+        { "name": "React", "currentLevel": 4, "requiredLevel": 5, "importance": "critical" },
+        { "name": "CSS", "currentLevel": 3, "requiredLevel": 4, "importance": "important" },
+        { "name": "HTML", "currentLevel": 4, "requiredLevel": 5, "importance": "important" },
+        { "name": "Git", "currentLevel": 3, "requiredLevel": 4, "importance": "important" },
+        { "name": "GraphQL", "currentLevel": 0, "requiredLevel": 3, "importance": "nice-to-have" },
+        { "name": "CI/CD", "currentLevel": 0, "requiredLevel": 3, "importance": "nice-to-have" }
+      ]
+    },
+    {
+      "id": 2,
+      "employeeId": 2,
+      "employeeName": "Marcus Johnson",
+      "currentRole": "Backend Developer",
+      "targetRole": "Tech Lead",
+      "matchPercentage": 60,
+      "currentSkills": [
+        { "name": "Python", "level": 5 },
+        { "name": "Django", "level": 4 },
+        { "name": "PostgreSQL", "level": 4 },
+        { "name": "REST APIs", "level": 4 },
+        { "name": "Docker", "level": 3 }
+      ],
+      "requiredSkills": [
+        { "name": "Python", "level": 5, "importance": "critical" },
+        { "name": "System Architecture", "level": 4, "importance": "critical" },
+        { "name": "Agile", "level": 4, "importance": "critical" },
+        { "name": "Stakeholder Management", "level": 3, "importance": "critical" },
+        { "name": "PostgreSQL", "level": 4, "importance": "important" },
+        { "name": "Docker", "level": 4, "importance": "important" },
+        { "name": "Kubernetes", "level": 3, "importance": "important" },
+        { "name": "CI/CD", "level": 4, "importance": "important" }
+      ],
+      "skillGaps": [
+        { "name": "System Architecture", "currentLevel": 0, "requiredLevel": 4, "importance": "critical" },
+        { "name": "Agile", "currentLevel": 0, "requiredLevel": 4, "importance": "critical" },
+        { "name": "Stakeholder Management", "currentLevel": 0, "requiredLevel": 3, "importance": "critical" },
+        { "name": "Docker", "currentLevel": 3, "requiredLevel": 4, "importance": "important" },
+        { "name": "Kubernetes", "currentLevel": 0, "requiredLevel": 3, "importance": "important" },
+        { "name": "CI/CD", "currentLevel": 0, "requiredLevel": 4, "importance": "important" }
+      ]
+    },
+    {
+      "id": 3,
+      "employeeId": 6,
+      "employeeName": "Tom Anderson",
+      "currentRole": "Junior Developer",
+      "targetRole": "Frontend Developer",
+      "matchPercentage": 45,
+      "currentSkills": [
+        { "name": "JavaScript", "level": 2 },
+        { "name": "HTML", "level": 3 },
+        { "name": "CSS", "level": 2 },
+        { "name": "Git", "level": 2 }
+      ],
+      "requiredSkills": [
+        { "name": "JavaScript", "level": 4, "importance": "critical" },
+        { "name": "React", "level": 3, "importance": "critical" },
+        { "name": "HTML", "level": 4, "importance": "critical" },
+        { "name": "CSS", "level": 4, "importance": "critical" },
+        { "name": "Git", "level": 3, "importance": "important" },
+        { "name": "TypeScript", "level": 2, "importance": "nice-to-have" }
+      ],
+      "skillGaps": [
+        { "name": "JavaScript", "currentLevel": 2, "requiredLevel": 4, "importance": "critical" },
+        { "name": "React", "currentLevel": 0, "requiredLevel": 3, "importance": "critical" },
+        { "name": "HTML", "currentLevel": 3, "requiredLevel": 4, "importance": "critical" },
+        { "name": "CSS", "currentLevel": 2, "requiredLevel": 4, "importance": "critical" },
+        { "name": "Git", "currentLevel": 2, "requiredLevel": 3, "importance": "important" },
+        { "name": "TypeScript", "currentLevel": 0, "requiredLevel": 2, "importance": "nice-to-have" }
+      ]
+    }
+  ]
+}
