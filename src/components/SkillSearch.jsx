@@ -18,7 +18,7 @@ function SkillSearch() {
   // Debounced fetch function
   const debouncedFetch = useMemo(
     () =>
-      debounce(async (query) => {
+      debounce(async query => {
         try {
           setLoading(true)
           setError(null) // Clear previous errors
@@ -60,7 +60,7 @@ function SkillSearch() {
           size="large"
           placeholder="Search for skills (e.g., JavaScript, Docker)"
           prefix={<SearchOutlined />}
-          onChange={(e) => setSearchTerm(e.target.value)}
+          onChange={e => setSearchTerm(e.target.value)}
           value={searchTerm}
         />
 
@@ -72,7 +72,7 @@ function SkillSearch() {
           <List
             dataSource={skills}
             locale={{ emptyText: error ? null : 'Start typing to search for skills' }}
-            renderItem={(skill) => (
+            renderItem={skill => (
               <List.Item>
                 <List.Item.Meta
                   title={skill.name}

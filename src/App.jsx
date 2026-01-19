@@ -28,7 +28,8 @@ function App() {
     {
       key: 'readiness',
       icon: <DashboardOutlined />,
-      label: 'Role Readiness'    },
+      label: 'Role Readiness',
+    },
   ]
 
   const renderContent = () => {

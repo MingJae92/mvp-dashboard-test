@@ -11,13 +11,12 @@ function EmployeeList({ searchTerm }) {
 
   useEffect(() => {
     setLoading(true)
-    axios.get('https://fantastic-fortnight-7r95qxrxg736qw-8001.app.github.dev/employees')
+    axios
+      .get('https://fantastic-fortnight-7r95qxrxg736qw-8001.app.github.dev/employees')
       .then(response => {
         const filtered = searchTerm
           ? response.data.filter(emp =>
-              emp.skills.some(skill =>
-                skill.toLowerCase().includes(searchTerm.toLowerCase())
-              )
+              emp.skills.some(skill => skill.toLowerCase().includes(searchTerm.toLowerCase()))
             )
           : response.data
         setEmployees(filtered)
@@ -29,7 +28,7 @@ function EmployeeList({ searchTerm }) {
       })
   }, [searchTerm])
 
-  const renderSkills = (employee) =>
+  const renderSkills = employee =>
     employee.skills.map(skill => (
       <Tag color="green" key={`${employee.id}-${skill}`}>
         {skill}
@@ -46,7 +45,7 @@ function EmployeeList({ searchTerm }) {
           grid={{ gutter: 16, xs: 1, sm: 2, md: 2, lg: 3, xl: 3, xxl: 4 }}
           dataSource={employees}
           locale={{ emptyText: 'No employees match your search' }}
-          renderItem={(employee) => (
+          renderItem={employee => (
             <List.Item>
               <Card
                 title={

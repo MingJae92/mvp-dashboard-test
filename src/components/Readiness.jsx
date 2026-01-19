@@ -13,17 +13,19 @@ function Readiness() {
 
   useEffect(() => {
     // Fetch employees for the dropdown
-    axios.get('http://localhost:8001/employees')
+    axios
+      .get('http://localhost:8001/employees')
       .then(response => setEmployees(response.data))
       .catch(error => console.error('Error fetching employees:', error))
   }, [])
 
-  const handleEmployeeSelect = (employeeId) => {
+  const handleEmployeeSelect = employeeId => {
     setSelectedEmployee(employeeId)
     setLoading(true)
-    
+
     // Fetch readiness data for selected employee
-    axios.get(`http://localhost:8001/readiness?employeeId=${employeeId}`)
+    axios
+      .get(`http://localhost:8001/readiness?employeeId=${employeeId}`)
       .then(response => {
         setReadinessData(response.data[0])
         setLoading(false)
