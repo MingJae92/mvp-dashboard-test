@@ -5,37 +5,38 @@ import axios from 'axios'
 
 const { Title, Text } = Typography
 
-function EmployeeList() {
+function EmployeeList({ searchTerm }) {
   const [employees, setEmployees] = useState([])
   const [loading, setLoading] = useState(true)
-  const debugVar = 'Debug variable' 
-
-  console.log('EmployeeList rendered')
 
   useEffect(() => {
-
-    axios.get('http://localhost:8001/employees')
+    setLoading(true)
+    axios.get('https://fantastic-fortnight-7r95qxrxg736qw-8001.app.github.dev/employees')
       .then(response => {
-        setEmployees(response.data)
+        const filtered = searchTerm
+          ? response.data.filter(emp =>
+              emp.skills.some(skill =>
+                skill.toLowerCase().includes(searchTerm.toLowerCase())
+              )
+            )
+          : response.data
+        setEmployees(filtered)
         setLoading(false)
       })
       .catch(error => {
         console.error('Error fetching employees:', error)
         setLoading(false)
       })
-  }, [])
+  }, [searchTerm])
 
-  const renderSkills = (skills) => {
-    return skills.map(skill => (
-      <Tag color="green" key={skill}>
+  const renderSkills = (employee) =>
+    employee.skills.map(skill => (
+      <Tag color="green" key={`${employee.id}-${skill}`}>
         {skill}
       </Tag>
     ))
-  }
 
-  if (loading) {
-    return <Spin size="large" />
-  }
+  if (loading) return <Spin size="large" />
 
   return (
     <div>
@@ -44,6 +45,7 @@ function EmployeeList() {
         <List
           grid={{ gutter: 16, xs: 1, sm: 2, md: 2, lg: 3, xl: 3, xxl: 4 }}
           dataSource={employees}
+          locale={{ emptyText: 'No employees match your search' }}
           renderItem={(employee) => (
             <List.Item>
               <Card
@@ -59,7 +61,8 @@ function EmployeeList() {
                   <div>
                     <Text strong>Skills:</Text>
                     <div style={{ marginTop: 8 }}>
-                      {renderSkills(employee.skills)}
+                      {/* Render skills as tags */}
+                      {renderSkills(employee)}
                     </div>
                   </div>
                 </Space>

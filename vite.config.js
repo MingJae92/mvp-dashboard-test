@@ -9,6 +9,13 @@ export default defineConfig({
     port: 3000,
     watch: {
       usePolling: true
-    }
-  }
+    },
+    proxy: {
+      '/api': {
+        target: 'http://localhost:8001', // JSON Server running inside Codespaces
+        changeOrigin: true,
+        secure: false,
+      },
+    },
+  },
 })

@@ -1,6 +1,7 @@
-import { useState, useEffect } from 'react'
-import { Input, Card, List, Tag, Typography, Space } from 'antd'
+import { useState, useEffect, useMemo } from 'react'
+import { Input, Card, List, Tag, Typography, Space, Alert } from 'antd'
 import { SearchOutlined } from '@ant-design/icons'
+import { debounce } from 'lodash'
 import axios from 'axios'
 
 const { Title, Text } = Typography
@@ -9,31 +10,47 @@ function SkillSearch() {
   const [searchTerm, setSearchTerm] = useState('')
   const [skills, setSkills] = useState([])
   const [loading, setLoading] = useState(false)
+  const [error, setError] = useState(null) // Track error state
+
+  // Replace this with your public Codespaces backend URL
+  const BACKEND_URL = 'https://fantastic-fortnight-7r95qxrxg736qw-8001.app.github.dev'
+
+  // Debounced fetch function
+  const debouncedFetch = useMemo(
+    () =>
+      debounce(async (query) => {
+        try {
+          setLoading(true)
+          setError(null) // Clear previous errors
+          const response = await axios.get(`${BACKEND_URL}/skills?q=${query}`)
+          if (response.data.length === 0) {
+            setSkills([])
+            setError('No skills found for your search.')
+          } else {
+            setSkills(response.data)
+          }
+        } catch (err) {
+          console.error('Error fetching skills:', err)
+          setSkills([])
+          setError('Failed to fetch skills. Please try again.')
+        } finally {
+          setLoading(false)
+        }
+      }, 300),
+    []
+  )
 
   useEffect(() => {
-    if (searchTerm.length > 2) {
-      setLoading(true)
-      
-      // Simulating API call with delay
-      setTimeout(() => {
-        axios.get(`http://localhost:8001/skills?q=${searchTerm}`)
-          .then(response => {
-            setSkills(response.data)
-            setLoading(false)
-          })
-          .catch(error => {
-            console.error('Error fetching skills:', error) 
-            setLoading(false)
-          })
-      }, 500)
-    } else {
+    if (searchTerm.length < 3) {
       setSkills([])
+      setError(null) // Clear error when search term is too short
+      return
     }
-  }, [searchTerm])
 
-  const handleSearch = (e) => {
-    setSearchTerm(e.target.value)
-  }
+    debouncedFetch(searchTerm)
+
+    return () => debouncedFetch.cancel()
+  }, [searchTerm, debouncedFetch])
 
   return (
     <div>
@@ -41,19 +58,20 @@ function SkillSearch() {
       <Space direction="vertical" style={{ width: '100%' }} size="large">
         <Input
           size="large"
-          placeholder="Search for skills (e.g., JavaScript, Project Management)"
+          placeholder="Search for skills (e.g., JavaScript, Docker)"
           prefix={<SearchOutlined />}
-          onChange={handleSearch}
+          onChange={(e) => setSearchTerm(e.target.value)}
           value={searchTerm}
         />
-        
-        
+
         {loading && <Text type="secondary">Searching...</Text>}
-        
+
+        {error && <Alert type="error" message={error} showIcon />}
+
         <Card>
           <List
             dataSource={skills}
-            locale={{ emptyText: 'Start typing to search for skills' }}
+            locale={{ emptyText: error ? null : 'Start typing to search for skills' }}
             renderItem={(skill) => (
               <List.Item>
                 <List.Item.Meta
