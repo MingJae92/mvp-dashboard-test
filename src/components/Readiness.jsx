@@ -14,7 +14,7 @@ function Readiness() {
   useEffect(() => {
     // Fetch employees for the dropdown
     axios
-      .get('http://localhost:8001/employees')
+      .get('https://fantastic-fortnight-7r95qxrxg736qw-8001.app.github.dev/employees')
       .then(response => setEmployees(response.data))
       .catch(error => console.error('Error fetching employees:', error))
   }, [])
@@ -25,7 +25,7 @@ function Readiness() {
 
     // Fetch readiness data for selected employee
     axios
-      .get(`http://localhost:8001/readiness?employeeId=${employeeId}`)
+      .get(`https://fantastic-fortnight-7r95qxrxg736qw-8001.app.github.dev/readiness?employeeId=${employeeId}`)
       .then(response => {
         setReadinessData(response.data[0])
         setLoading(false)
