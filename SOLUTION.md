@@ -1,5 +1,37 @@
 # Role Readiness Dashboard – Technical Challenge Solutions
 
+**. Access the Application (Codespaces Setup in browser)**
+
+### Frontend URL:
+
+As application loads type npm run dev in code space terminal
+
+In Codespaces, your React frontend runs on port 3000. After starting the app (npm start), open the Ports tab in Codespaces and forward port 3000. You can then access it via the generated URL, e.g.:
+
+https://<your-codespace-name>-3000.githubpreview.dev
+
+### Mock API Data:
+
+To access Mock API Data in code space terminal , run docker-compose up --build. 
+
+The backend server runs on port 8001 (using db.json for mock data). Forward port 8001 in Codespaces to access the API:
+
+https://<your-codespace-name>-8001.githubpreview.dev/employees
+
+### Local Development Steps in Codespaces:
+
+Open the Codespace terminal.
+
+Forward the ports 3000 (frontend) and 8001 (API) from the Ports tab.
+
+Notes:
+
+Make sure your React app uses the Codespaces API URL (https://<codespace>-8001.githubpreview.dev) instead of localhost for the API calls.
+
+Once ports are forwarded, you can open both frontend and API endpoints in your browser.
+
+Make sure the PORTS for front end and back end have their visibility set to Public this can be found on the PORTS tab of the code space terminal. This prevents any CORS issues when loading the end points data.
+
 ## 0. Task 1: Fix Something (The "Sync" Bug)
 
 ### Bug Description:
