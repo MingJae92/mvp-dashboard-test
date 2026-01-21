@@ -77,3 +77,35 @@ Users can scan readiness, skill gaps, and expertise levels at a glance. Visual c
 
 - **Unit & Integration Testing:** Would use React Testing Library and Jest/Vitest to test hooks, dropdown functionality, and readiness display.
 - **Deployment:** Set up with Vercel/Netlify or Dockerized app with CI/CD pipeline for continuous deployment if more time was available.
+
+---
+
+## 8. Final App.js File
+
+This is the final modular version of the `App.js` file with all routes and components integrated.
+
+```jsx
+import { Routes, Route, Navigate } from 'react-router-dom'
+
+import AppLayout from './app/AppLayout'
+import EmployeeList from './components/EmployeeList'
+import SkillSearch from './components/SkillSearch'
+import Readiness from './components/Readiness'
+import EmployeeProfile from './components/EmployeeProfile'
+
+function App() {
+  return (
+    <AppLayout>
+      <Routes>
+        <Route path="/" element={<Navigate to="/employees" replace />} />
+        <Route path="/employees" element={<EmployeeList />} />
+        <Route path="/search" element={<SkillSearch />} />
+        <Route path="/readiness" element={<Readiness />} />
+        <Route path="*" element={<Navigate to="/employees" replace />} />
+        <Route path="/employees/:employeeId" element={<EmployeeProfile />} />
+      </Routes>
+    </AppLayout>
+  )
+}
+
+export default App
