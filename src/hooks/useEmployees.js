@@ -7,11 +7,28 @@ export function useEmployees() {
   const [error, setError] = useState(null)
 
   useEffect(() => {
-    axios
-      .get('https://fantastic-fortnight-7r95qxrxg736qw-8001.app.github.dev/employees')
-      .then(res => setEmployees(res.data))
-      .catch(() => setError('Failed to load employees'))
-      .finally(() => setLoading(false))
+    const fetchReadinessEmployees = async () => {
+      try {
+        setLoading(true)
+        // 1️⃣ Fetch all readiness data
+        const res = await axios.get(
+          'https://fantastic-fortnight-7r95qxrxg736qw-8001.app.github.dev/readiness'
+        )
+        // 2️⃣ Map to a simplified list of employees
+        const readinessEmployees = res.data.map(r => ({
+          id: r.employeeId,
+          name: r.employeeName,
+          role: r.currentRole,
+        }))
+        setEmployees(readinessEmployees)
+      } catch (err) {
+        setError('Failed to load employees with readiness data')
+      } finally {
+        setLoading(false)
+      }
+    }
+
+    fetchReadinessEmployees()
   }, [])
 
   return { employees, loading, error }
