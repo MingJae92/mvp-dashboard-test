@@ -112,6 +112,33 @@ Users can scan readiness, skill gaps, and expertise levels at a glance. Visual c
 - Create reusable wrappers for `Card`, `List`, `Rate`.
 - Override defaults to match brand identity consistently.
 
+### How would you handle a custom-branded theme in the future?
+
+In the future, I would implement a custom-branded theme by centralizing all brand tokens—such as colors, typography, spacing, and component styles—so they can be consistently applied across the application.
+
+For example:
+
+Central Theme Object / CSS Variables
+
+Define a theme object (or CSS variables) with semantic names like primary, secondary, success, warning, fontFamily, spacingSmall, etc.
+
+This ensures all components reference the brand values rather than hardcoding styles, making it easy to update or switch themes in the future.
+
+UI Library Integration
+
+For libraries like Ant Design or MUI, I would use their theme providers (ConfigProvider for AntD, ThemeProvider for MUI) to inject custom brand tokens across all components.
+
+Component-level overrides would consume these tokens for consistency.
+
+Responsive and Accessible Design
+
+Ensure that brand styles work across devices and maintain accessibility, e.g., sufficient color contrast, focus states, and screen-reader support.
+
+Scalable and Maintainable
+
+Use semantic names and theme-based styling so that new components automatically follow the brand without additional manual styling.
+
+Optionally support multiple themes (e.g., dark mode, light mode, or white-labeling) by swapping theme objects.
 ---
 
 ## 7. Notes on Testing and Deployment
