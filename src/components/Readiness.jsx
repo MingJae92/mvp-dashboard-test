@@ -1,15 +1,13 @@
-import { useState } from 'react'
 import { Card, Select, Typography, Space, Spin, Alert } from 'antd'
+import { useNavigate } from 'react-router-dom'
 import { useEmployees } from '../hooks/useEmployees'
-import { useReadiness } from '../hooks/useReadiness'
 
 const { Title, Text } = Typography
 const { Option } = Select
 
 function Readiness() {
-  const [selectedEmployee, setSelectedEmployee] = useState(null)
-  const { employees, loading: employeesLoading, error: employeesError } = useEmployees()
-  const { data, loading: readinessLoading, error: readinessError } = useReadiness(selectedEmployee)
+  const navigate = useNavigate()
+  const { employees, loading, error } = useEmployees()
 
   return (
     <div>
@@ -20,15 +18,16 @@ function Readiness() {
           <Space direction="vertical" style={{ width: '100%' }}>
             <Text strong>Select an Employee:</Text>
 
-            {employeesLoading && <Spin />}
-            {employeesError && <Alert type="error" message={employeesError} />}
+            {loading && <Spin />}
+            {error && <Alert type="error" message={error} />}
 
-            {!employeesLoading && !employeesError && (
+            {!loading && !error && (
               <Select
                 style={{ width: '100%' }}
                 placeholder="Choose an employee"
-                value={selectedEmployee}
-                onChange={setSelectedEmployee}
+                onChange={(employeeId) =>
+                  navigate(`/employees/${employeeId}`)
+                }
               >
                 {employees.map(emp => (
                   <Option key={emp.id} value={emp.id}>
@@ -39,19 +38,6 @@ function Readiness() {
             )}
           </Space>
         </Card>
-
-        {readinessLoading && <Spin size="large" />}
-        {readinessError && <Alert type="error" message={readinessError} />}
-
-        {data && !readinessLoading && (
-          <Alert
-            type="info"
-            showIcon
-            message="Role Readiness"
-            description={`Employee: ${data.employeeName}
-Target Role: ${data.targetRole}`}
-          />
-        )}
       </Space>
     </div>
   )

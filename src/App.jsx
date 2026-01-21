@@ -4,6 +4,7 @@ import AppLayout from './app/AppLayout'
 import EmployeeList from './components/EmployeeList'
 import SkillSearch from './components/SkillSearch'
 import Readiness from './components/Readiness'
+import EmployeeProfile from './components/EmployeeProfile'
 
 function App() {
   return (
@@ -14,6 +15,7 @@ function App() {
         <Route path="/search" element={<SkillSearch />} />
         <Route path="/readiness" element={<Readiness />} />
         <Route path="*" element={<Navigate to="/employees" replace />} />
+         <Route path="/employees/:employeeId" element={<EmployeeProfile />} />
       </Routes>
     </AppLayout>
   )
