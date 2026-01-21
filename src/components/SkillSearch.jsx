@@ -10,9 +10,8 @@ function SkillSearch() {
   const [searchTerm, setSearchTerm] = useState('')
   const [skills, setSkills] = useState([])
   const [loading, setLoading] = useState(false)
-  const [error, setError] = useState(null) // Track error state
+  const [error, setError] = useState(null)
 
-  // Replace this with your public Codespaces backend URL
   const BACKEND_URL = 'https://fantastic-fortnight-7r95qxrxg736qw-8001.app.github.dev'
 
   // Debounced fetch function
@@ -21,7 +20,7 @@ function SkillSearch() {
       debounce(async query => {
         try {
           setLoading(true)
-          setError(null) // Clear previous errors
+          setError(null)
           const response = await axios.get(`${BACKEND_URL}/skills?q=${query}`)
           if (response.data.length === 0) {
             setSkills([])
@@ -43,7 +42,7 @@ function SkillSearch() {
   useEffect(() => {
     if (searchTerm.length < 3) {
       setSkills([])
-      setError(null) // Clear error when search term is too short
+      setError(null)
       return
     }
 
@@ -53,9 +52,11 @@ function SkillSearch() {
   }, [searchTerm, debouncedFetch])
 
   return (
-    <div>
+    <div style={{ maxWidth: 900, margin: '0 auto', padding: '0 16px' }}>
       <Title level={2}>Skill Search</Title>
-      <Space direction="vertical" style={{ width: '100%' }} size="large">
+
+      <Space direction="vertical" size="large" style={{ width: '100%' }}>
+        {/* Search Input */}
         <Input
           size="large"
           placeholder="Search for skills (e.g., JavaScript, Docker)"
@@ -64,11 +65,16 @@ function SkillSearch() {
           value={searchTerm}
         />
 
-        {loading && <Text type="secondary">Searching...</Text>}
-
+        {/* Loading & Error */}
+        {loading && (
+          <div style={{ display: 'flex', justifyContent: 'center' }}>
+            <Text type="secondary">Searching...</Text>
+          </div>
+        )}
         {error && <Alert type="error" message={error} showIcon />}
 
-        <Card>
+        {/* Skills List */}
+        <Card bodyStyle={{ padding: 16 }}>
           <List
             dataSource={skills}
             locale={{ emptyText: error ? null : 'Start typing to search for skills' }}
@@ -77,7 +83,7 @@ function SkillSearch() {
                 <List.Item.Meta
                   title={skill.name}
                   description={
-                    <Space>
+                    <Space size={[4, 8]} wrap>
                       <Tag color="blue">{skill.category}</Tag>
                       <Text type="secondary">{skill.description}</Text>
                     </Space>
