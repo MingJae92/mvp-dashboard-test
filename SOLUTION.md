@@ -139,6 +139,7 @@ Ensure that brand styles work across devices and maintain accessibility, e.g., s
 Use semantic names and theme-based styling so that new components automatically follow the brand without additional manual styling.
 
 Optionally support multiple themes (e.g., dark mode, light mode, or white-labeling) by swapping theme objects.
+
 ---
 
 ## 7. Notes on Testing and Deployment
