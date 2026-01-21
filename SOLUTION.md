@@ -1,5 +1,25 @@
 # Role Readiness Dashboard – Technical Challenge Solutions
 
+## 0. Task 1: Fix Something (The "Sync" Bug)
+
+### Bug Description:
+The HR team reported that the skill search and employee list were behaving strangely. Specifically:
+
+- Searching for a skill often displayed results from the **previous search**.
+- This was caused by a **stale state issue** in React due to asynchronous updates.
+- Rapid typing made the problem worse, as the component would render outdated results.
+
+### Fix Implemented:
+- Updated `SkillSearch.jsx` and `EmployeeList.jsx` to properly handle state updates.
+- Implemented **debouncing** to reduce unnecessary API calls during rapid typing.
+- Ensured the component waits for the latest state before rendering results.
+- Verified that search results now match the current input immediately.
+
+**Trade-off Considered:**  
+Debouncing introduces a slight delay (~300ms) in showing results, but it significantly improves performance and fixes the stale state bug.
+
+---
+
 ## 1. AI Usage
 
 I used AI tools (ChatGPT) to scaffold React components and custom hooks (`useEmployees`, `useReadiness`) and suggested Ant Design components (`Progress`, `Rate`, `List`, `Tag`).
