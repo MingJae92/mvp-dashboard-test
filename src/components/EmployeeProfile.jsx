@@ -28,6 +28,8 @@ function EmployeeProfile() {
   if (loading)
     return (
       <div
+        role="status"
+        aria-live="polite"
         style={{
           display: 'flex',
           justifyContent: 'center',
@@ -35,21 +37,28 @@ function EmployeeProfile() {
         }}
       >
         <Spin size="large" />
+        <span className="sr-only">Loading employee profile...</span>
       </div>
     )
 
   if (error)
     return (
       <div style={{ padding: 16 }}>
-        <Alert type="error" message={error} showIcon />
+        <Alert type="error" message="Error loading profile" description={error} showIcon />
       </div>
     )
 
   if (!data) return null
 
   return (
-    <div style={{ maxWidth: 900, margin: '0 auto', padding: '0 16px' }}>
-      <Card bodyStyle={{ padding: 24 }}>
+    <div
+      style={{ maxWidth: 900, margin: '0 auto', padding: '0 16px' }}
+      aria-label={`Profile of ${data.employeeName}`}
+    >
+      <Card
+        bodyStyle={{ padding: 24 }}
+        tabIndex={0} // Make the card focusable
+      >
         {/* Header */}
         <Space
           direction="vertical"
@@ -72,6 +81,8 @@ function EmployeeProfile() {
           status={data.matchPercentage >= 70 ? 'success' : 'active'}
           strokeWidth={16}
           style={{ width: '100%' }}
+          format={percent => `${percent}% match`} // Screen reader friendly
+          aria-label={`Role match percentage: ${data.matchPercentage}%`}
         />
 
         <Divider />
@@ -80,19 +91,16 @@ function EmployeeProfile() {
         <Title level={4}>Skill Gaps</Title>
         <List
           dataSource={data.skillGaps}
+          role="list"
+          aria-label="Skill gaps"
           renderItem={gap => (
-            <List.Item>
+            <List.Item role="listitem">
               <Space
                 direction="vertical"
                 size="small"
-                style={{
-                  width: '100%',
-                }}
+                style={{ width: '100%' }}
               >
-                <Space
-                  direction="vertical"
-                  style={{ flex: 1, minWidth: 0 }}
-                >
+                <Space direction="vertical" style={{ flex: 1, minWidth: 0 }}>
                   <Text strong style={{ wordBreak: 'break-word' }}>
                     {gap.name}
                   </Text>
@@ -101,7 +109,10 @@ function EmployeeProfile() {
                   </Text>
                 </Space>
 
-                <Tag color={importanceColorMap[gap.importance]}>
+                <Tag
+                  color={importanceColorMap[gap.importance]}
+                  aria-label={`Importance: ${gap.importance}`}
+                >
                   {gap.importance}
                 </Tag>
               </Space>
@@ -115,8 +126,10 @@ function EmployeeProfile() {
         <Title level={4}>Current Expertise</Title>
         <List
           dataSource={data.currentSkills}
+          role="list"
+          aria-label="Current expertise skills"
           renderItem={skill => (
-            <List.Item>
+            <List.Item role="listitem">
               <Space
                 style={{
                   width: '100%',
@@ -127,7 +140,12 @@ function EmployeeProfile() {
                 <Text style={{ minWidth: 120, wordBreak: 'break-word' }}>
                   {skill.name}
                 </Text>
-                <Rate disabled value={skill.level} count={5} />
+                <Rate
+                  disabled
+                  value={skill.level}
+                  count={5}
+                  aria-label={`${skill.name} expertise level: ${skill.level} out of 5`}
+                />
               </Space>
             </List.Item>
           )}

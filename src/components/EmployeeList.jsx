@@ -36,7 +36,12 @@ function EmployeeList({ searchTerm }) {
   const renderSkills = employee => (
     <Space size={[4, 8]} wrap>
       {employee.skills.map(skill => (
-        <Tag color="green" key={`${employee.id}-${skill}`}>
+        <Tag
+          color="green"
+          key={`${employee.id}-${skill}`}
+          role="listitem"
+          aria-label={`Skill: ${skill}`}
+        >
           {skill}
         </Tag>
       ))}
@@ -46,6 +51,8 @@ function EmployeeList({ searchTerm }) {
   if (loading) {
     return (
       <div
+        role="status"
+        aria-live="polite"
         style={{
           display: 'flex',
           justifyContent: 'center',
@@ -53,12 +60,16 @@ function EmployeeList({ searchTerm }) {
         }}
       >
         <Spin size="large" />
+        <span className="sr-only">Loading employees...</span>
       </div>
     )
   }
 
   return (
-    <div style={{ maxWidth: 1200, margin: '0 auto', padding: '0 16px' }}>
+    <div
+      style={{ maxWidth: 1200, margin: '0 auto', padding: '0 16px' }}
+      aria-label="Team Members List"
+    >
       <Title level={2}>Team Members</Title>
 
       <Space direction="vertical" style={{ width: '100%' }} size="large">
@@ -74,13 +85,18 @@ function EmployeeList({ searchTerm }) {
           }}
           dataSource={employees}
           locale={{ emptyText: 'No employees match your search' }}
+          role="list"
           renderItem={employee => (
-            <List.Item>
+            <List.Item role="listitem">
               <Card
+                tabIndex={0} // Make the card focusable for keyboard users
+                aria-label={`Employee ${employee.name}, Role: ${employee.role}, Skills: ${employee.skills.join(
+                  ', '
+                )}`}
                 bodyStyle={{ padding: 16 }}
                 title={
                   <Space wrap>
-                    <Avatar icon={<UserOutlined />} />
+                    <Avatar icon={<UserOutlined />} alt={`${employee.name} avatar`} />
                     <Text strong>{employee.name}</Text>
                   </Space>
                 }
@@ -90,7 +106,7 @@ function EmployeeList({ searchTerm }) {
 
                   <div>
                     <Text strong>Skills:</Text>
-                    <div style={{ marginTop: 8 }}>
+                    <div style={{ marginTop: 8 }} role="list">
                       {renderSkills(employee)}
                     </div>
                   </div>

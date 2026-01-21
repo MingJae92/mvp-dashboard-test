@@ -12,28 +12,34 @@ function Readiness() {
   return (
     <div
       style={{
-        maxWidth: 900,       // keeps content readable on large screens
+        maxWidth: 900,
         margin: '0 auto',
-        padding: '0 16px',   // padding for mobile
+        padding: '0 16px',
       }}
+      aria-label="Role Readiness Dashboard"
     >
       <Title level={2}>Role Readiness Dashboard</Title>
 
       <Space direction="vertical" size="large" style={{ width: '100%' }}>
-        <Card bodyStyle={{ padding: 16 }}>
+        <Card
+          bodyStyle={{ padding: 16 }}
+          tabIndex={0} // make card focusable for keyboard users
+          aria-label="Select an employee to view readiness details"
+        >
           <Space direction="vertical" size="middle" style={{ width: '100%' }}>
-            <Text strong>Select an Employee:</Text>
+            <Text strong id="employee-select-label">
+              Select an Employee:
+            </Text>
 
             {/* Loading Spinner */}
             {loading && (
               <div
-                style={{
-                  display: 'flex',
-                  justifyContent: 'center',
-                  padding: '8px 0',
-                }}
+                role="status"
+                aria-live="polite"
+                style={{ display: 'flex', justifyContent: 'center', padding: '8px 0' }}
               >
                 <Spin size="large" />
+                <span className="sr-only">Loading employees...</span>
               </div>
             )}
 
@@ -44,6 +50,7 @@ function Readiness() {
                 message="Error loading employees"
                 description={error}
                 showIcon
+                role="alert"
               />
             )}
 
@@ -56,6 +63,7 @@ function Readiness() {
                 onChange={employeeId => navigate(`/employees/${employeeId}`)}
                 optionFilterProp="children"
                 showSearch
+                aria-labelledby="employee-select-label"
                 filterOption={(input, option) =>
                   option.children
                     .toLowerCase()
@@ -63,7 +71,11 @@ function Readiness() {
                 }
               >
                 {employees.map(emp => (
-                  <Option key={emp.id} value={emp.id}>
+                  <Option
+                    key={emp.id}
+                    value={emp.id}
+                    aria-label={`${emp.name}, Role: ${emp.role}`}
+                  >
                     {emp.name} – {emp.role}
                   </Option>
                 ))}

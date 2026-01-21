@@ -52,7 +52,10 @@ function SkillSearch() {
   }, [searchTerm, debouncedFetch])
 
   return (
-    <div style={{ maxWidth: 900, margin: '0 auto', padding: '0 16px' }}>
+    <div
+      style={{ maxWidth: 900, margin: '0 auto', padding: '0 16px' }}
+      aria-label="Skill Search Section"
+    >
       <Title level={2}>Skill Search</Title>
 
       <Space direction="vertical" size="large" style={{ width: '100%' }}>
@@ -63,28 +66,42 @@ function SkillSearch() {
           prefix={<SearchOutlined />}
           onChange={e => setSearchTerm(e.target.value)}
           value={searchTerm}
+          aria-label="Skill search input"
+          aria-describedby="skill-search-instructions"
         />
+        <Text id="skill-search-instructions" type="secondary">
+          Type at least 3 characters to search for skills.
+        </Text>
 
         {/* Loading & Error */}
         {loading && (
-          <div style={{ display: 'flex', justifyContent: 'center' }}>
+          <div
+            role="status"
+            aria-live="polite"
+            style={{ display: 'flex', justifyContent: 'center' }}
+          >
             <Text type="secondary">Searching...</Text>
+            <span className="sr-only">Searching for skills</span>
           </div>
         )}
-        {error && <Alert type="error" message={error} showIcon />}
+        {error && <Alert type="error" message={error} showIcon role="alert" />}
 
         {/* Skills List */}
         <Card bodyStyle={{ padding: 16 }}>
           <List
             dataSource={skills}
+            role="list"
+            aria-label="Search results for skills"
             locale={{ emptyText: error ? null : 'Start typing to search for skills' }}
             renderItem={skill => (
-              <List.Item>
+              <List.Item role="listitem">
                 <List.Item.Meta
-                  title={skill.name}
+                  title={<span>{skill.name}</span>}
                   description={
                     <Space size={[4, 8]} wrap>
-                      <Tag color="blue">{skill.category}</Tag>
+                      <Tag color="blue" aria-label={`Category: ${skill.category}`}>
+                        {skill.category}
+                      </Tag>
                       <Text type="secondary">{skill.description}</Text>
                     </Space>
                   }
